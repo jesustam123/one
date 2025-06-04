@@ -5,15 +5,92 @@
   <title>Contador de Vistas Profesional</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Fuente moderna y profesional -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Fondo animado */
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70, #4158D0);
+      background-size: 400% 400%;
+      animation: gradientBG 14s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .stats-card {
+      background: rgba(44, 62, 80, 0.92);
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+      padding: 2.5em 3em;
+      margin-bottom: 2em;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      max-width: 340px;
+    }
+    .icon-container {
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px 0;
+      text-shadow: 2px 2px 8px #0007;
+    }
+    .counter {
+      display: block;
+      font-size: 3.3rem;
+      font-weight: bold;
+      color: #FFCC70;
+      text-shadow: 2px 2px 16px #C850C0;
+      margin: 0.5em 0 0.2em 0;
+      letter-spacing: 0.09em;
+      transition: transform 0.2s;
+      font-variant-numeric: tabular-nums;
+    }
+    .subtext {
+      color: #e0e0e0;
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 0.7em;
+      text-shadow: 1px 1px 3px #2226;
+    }
+    footer {
+      color: #fff;
+      opacity: 0.9;
+      font-size: 0.98em;
+      text-shadow: 1px 1px 3px #3338;
+    }
+    /* Responsive */
+    @media (max-width: 500px) {
+      .stats-card {
+        padding: 1.3em 0.7em;
+        max-width: 98vw;
+      }
+      h2 { font-size: 1.4rem; }
+      .counter { font-size: 2.1rem; }
+    }
+  </style>
 </head>
 <body>
   <main class="dashboard">
     <section class="stats-card">
       <div class="icon-container">
         <!-- Ícono SVG profesional -->
-        <svg width="42" height="42" fill="none" stroke="#2d3748" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <svg width="42" height="42" fill="none" stroke="#FFCC70" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
           <circle cx="12" cy="12" r="3"/>
         </svg>
@@ -28,6 +105,27 @@
       <span>&copy; 2025 Tu Empresa | Dashboard de analíticas</span>
     </footer>
   </main>
-  <script src="contador.js"></script>
+  <script>
+    // --- Contador animado (ajusta el número total aquí) ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const contador = document.getElementById('contador');
+      const vistas = 12345; // <-- Cambia este número al real
+      let actual = 0;
+      const duration = 1200; // ms
+      const steps = 40;
+      let step = 0;
+      function animateCount() {
+        actual = Math.round(vistas * (step / steps));
+        contador.textContent = actual.toLocaleString();
+        if (step < steps) {
+          step++;
+          setTimeout(animateCount, duration / steps);
+        } else {
+          contador.textContent = vistas.toLocaleString();
+        }
+      }
+      animateCount();
+    });
+  </script>
 </body>
 </html>
